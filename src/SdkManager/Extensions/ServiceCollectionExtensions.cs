@@ -1,4 +1,7 @@
+using CliWrapper;
 using Microsoft.Extensions.DependencyInjection;
+using SdkManager.ProcessManagers;
+using SdkManager.ProcessManagers.Abstractions;
 using SdkManager.Services;
 using SdkManager.Services.Abstractions;
 using SdkManager.ViewModels.Pages;
@@ -18,6 +21,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddViews(this IServiceCollection services)
     {
         services.AddTransient<HomeView>();
+        services.AddTransient<SdkListView>();
         services.AddTransient<SettingsView>();
         return services;
     }
@@ -26,7 +30,28 @@ public static class ServiceCollectionExtensions
     {
         services.AddSingleton<MainWindowViewModel>();
         services.AddTransient<HomeViewModel>();
+        services.AddTransient<SdkListViewModel>();
         services.AddTransient<SettingsViewModel>();
+        return services;
+    }
+
+    public static IServiceCollection AddDotnetCliWrapper(this IServiceCollection services)
+    {
+        services.AddSingleton<IDotnetCliWrapper, DotnetCliWrapper>();
+        return services;
+    }
+
+    public static IServiceCollection AddProcessManager(this IServiceCollection services)
+    {
+        if (OperatingSystem.IsMacOS())
+        {
+            services.AddSingleton<IProcessManager, MacOsProcessManager>();
+        }
+        else
+        {
+            throw new NotImplementedException("Other operating systems are not supported yet.");
+        }
+        
         return services;
     }
 }

@@ -5,6 +5,7 @@ using Avalonia.Data.Core.Plugins;
 using System.Linq;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using SdkManager.Extensions;
 using SdkManager.Services;
 using SdkManager.Services.Abstractions;
@@ -55,9 +56,16 @@ public class App : Application
     private static IServiceProvider CreateServiceProvider()
     {
         IServiceCollection services = new ServiceCollection()
+            .AddLogging(builder =>
+            {
+                builder.AddConsole();
+            })
             .AddServices()
             .AddViews()
-            .AddViewModels();
+            .AddViewModels()
+            .AddDotnetCliWrapper()
+            .AddProcessManager();
+        
 
         return services.BuildServiceProvider();
     }

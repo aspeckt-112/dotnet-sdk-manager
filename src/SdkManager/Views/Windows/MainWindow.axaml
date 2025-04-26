@@ -10,15 +10,13 @@
         MinHeight="768"
         Icon="/Assets/avalonia-logo.ico"
         Title="SdkManager">
-    
-    <DockPanel>
 
+    <DockPanel>
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Spacing="10">
             <Button Content="Home" Command="{Binding NavigateToHomeCommand}" />
+            <Button Content="SDK List" Command="{Binding NavigateToSdkListCommand}" />
             <Button Content="Settings" Command="{Binding NavigateToSettingsCommand}" />
         </StackPanel>
-
         <ContentControl Content="{Binding CurrentView}" />
-        
     </DockPanel>
 </Window>

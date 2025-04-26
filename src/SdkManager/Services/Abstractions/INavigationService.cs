@@ -1,11 +1,11 @@
-using System;
 using Avalonia.Controls;
+using SdkManager.Views;
 
 namespace SdkManager.Services.Abstractions;
 
 public interface INavigationService
 {
-    void NavigateTo<TView>() where TView : UserControl;
+    void NavigateTo<TView>() where TView : NavigatableUserControl;
 
-    Action<UserControl> OnNavigated { get; set; }
+    Action<UserControl> OnNavigationCompleted { get; set; }
 }

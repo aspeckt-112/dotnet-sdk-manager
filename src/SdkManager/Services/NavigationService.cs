@@ -1,18 +1,18 @@
-using System;
 using Avalonia.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using SdkManager.Services.Abstractions;
-using SdkManager.ViewModels;
+using SdkManager.Views;
 
 namespace SdkManager.Services;
 
 public class NavigationService(IServiceProvider serviceProvider) : INavigationService
 {
-    public void NavigateTo<TView>() where TView : UserControl
+    public void NavigateTo<TView>() where TView : NavigatableUserControl
     {
         var view = serviceProvider.GetRequiredService<TView>();
-        OnNavigated(view);
+        view.OnNavigatedTo();
+        OnNavigationCompleted(view);
     }
 
-    public Action<UserControl> OnNavigated { get; set; } = null!;
+    public Action<UserControl> OnNavigationCompleted { get; set; } = null!;
 }
