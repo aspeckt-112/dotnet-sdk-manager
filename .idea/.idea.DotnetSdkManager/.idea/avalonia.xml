@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="src/SdkManager/App.axaml" value="src/SdkManager/SdkManager.csproj" />
+        <entry key="src/SdkManager/Views/HomeView.axaml" value="src/SdkManager/SdkManager.csproj" />
+        <entry key="src/SdkManager/Views/MainWindow.axaml" value="src/SdkManager/SdkManager.csproj" />
+        <entry key="src/SdkManager/Views/Pages/HomeView.axaml" value="src/SdkManager/SdkManager.csproj" />
+        <entry key="src/SdkManager/Views/Pages/SettingsView.axaml" value="src/SdkManager/SdkManager.csproj" />
+        <entry key="src/SdkManager/Views/SettingsPage.axaml" value="src/SdkManager/SdkManager.csproj" />
+        <entry key="src/SdkManager/Views/SettingsView.axaml" value="src/SdkManager/SdkManager.csproj" />
+        <entry key="src/SdkManager/Views/Windows/MainWindow.axaml" value="src/SdkManager/SdkManager.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

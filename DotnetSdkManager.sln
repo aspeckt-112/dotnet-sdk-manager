@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1577C910-09A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3C32C5A0-C7CC-455A-8134-746C4D5A2F19}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkManager", "src\SdkManager\SdkManager.csproj", "{23E9AA52-C52E-49AB-AE27-FBD31E2FBADD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,5 +23,14 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{23E9AA52-C52E-49AB-AE27-FBD31E2FBADD} = {1577C910-09A3-43B6-B377-A9909102064F}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{23E9AA52-C52E-49AB-AE27-FBD31E2FBADD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23E9AA52-C52E-49AB-AE27-FBD31E2FBADD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23E9AA52-C52E-49AB-AE27-FBD31E2FBADD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23E9AA52-C52E-49AB-AE27-FBD31E2FBADD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
