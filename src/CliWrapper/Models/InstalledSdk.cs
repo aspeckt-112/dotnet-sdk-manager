@@ -1,3 +1,3 @@
 namespace CliWrapper.Models;
 
-public record InstalledSdk(Version Version, string InstallationPath);
+public record InstalledSdk(string Version, string InstallationPath);

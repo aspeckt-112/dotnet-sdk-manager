@@ -22,8 +22,15 @@ public partial class SdkListView : NavigatableUserControl
         await _viewModel.OnNavigatedTo();
     }
 
-    private async void OnListItemDoubleClicked(object? sender, TappedEventArgs e)
+    private async void OnGridRowDoubleTapped(object? sender, TappedEventArgs e)
     {
-        await _viewModel.OnSdkSelected();
+        try
+        {
+            await _viewModel.OnSdkSelected();
+        }
+        catch (Exception exception)
+        {
+            throw; // TODO handle exception
+        }
     }
 }

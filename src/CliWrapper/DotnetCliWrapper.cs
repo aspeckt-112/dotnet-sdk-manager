@@ -58,7 +58,7 @@ public class DotnetCliWrapper : IDotnetCliWrapper
             Func<string, InstalledSdk> parseSdkListLine = line =>
             {
                 string[] splitLine = line.Split(' ');
-                Version version = Version.Parse(splitLine[0]);
+                string version = splitLine[0];
                 string path = splitLine[1].Trim('[', ']');
                 return new InstalledSdk(version, path);
             };
