@@ -54,18 +54,11 @@ public class DotnetCliWrapper : IDotnetCliWrapper
                 
                 return null;
             }
-
-            Func<string, InstalledSdk> parseSdkListLine = line =>
-            {
-                string[] splitLine = line.Split(' ');
-                string version = splitLine[0];
-                string path = splitLine[1].Trim('[', ']');
-                return new InstalledSdk(version, path);
-            };
             
             return output.Split(Environment.NewLine)
                 .Where(line => !string.IsNullOrWhiteSpace(line))
-                .Select(parseSdkListLine)
+                .Select(ParseSdkListLine)
+                .OrderByDescending(sdk => sdk.SdkVersion)
                 .ToFrozenSet();
         }
         catch (Exception e)
@@ -92,6 +85,50 @@ public class DotnetCliWrapper : IDotnetCliWrapper
             RedirectStandardOutput = true,
             RedirectStandardError = true,
             CreateNoWindow = true
+        };
+    }
+    
+    private InstalledSdk ParseSdkListLine(string line)
+    {
+        string[] splitLine = line.Split(' ');
+
+        if (splitLine.Length != 2)
+        {
+            throw new FormatException($"Invalid SDK list line format: {line}");
+        }
+
+        string versionString = splitLine[0].Trim();
+        string installationPath = splitLine[1].Trim('[', ']');
+
+        bool isPreview = !Version.TryParse(versionString, out Version? version);
+
+        if (!isPreview)
+        {
+            return new InstalledSdk
+            {
+                SdkVersion = version!,
+                InstallationPath = installationPath
+            };
+        }
+
+        string[] splitVersion = versionString.ToLower().Replace("preview.", string.Empty).Split('-');
+
+        if (splitVersion.Length != 2)
+        {
+            throw new FormatException($"Invalid preview version format: {versionString}");
+        }
+
+        if (!Version.TryParse(splitVersion[0], out Version? sdkVersion) ||
+            !Version.TryParse(splitVersion[1], out Version? previewVersion))
+        {
+            throw new FormatException($"Invalid version format: {versionString}");
+        }
+        
+        return new InstalledSdk
+        {
+            SdkVersion = sdkVersion,
+            PreviewVersion = previewVersion,
+            InstallationPath = installationPath
         };
     }
 }

@@ -4,23 +4,39 @@
                               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                               xmlns:views="clr-namespace:SdkManager.Views"
                               xmlns:pages="clr-namespace:SdkManager.ViewModels.Pages"
+                              xmlns:converters="clr-namespace:SdkManager.Converters"
                               x:DataType="pages:SdkListViewModel"
                               mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
                               x:Class="SdkManager.Views.Pages.SdkListView">
+    <StackPanel Orientation="Vertical">
+        <DataGrid Margin="20"
+                  ItemsSource="{Binding Sdks}"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  BorderThickness="2"
+                  GridLinesVisibility="All"
+                  SelectedItem="{Binding SelectedSdk}"
+                  DoubleTapped="OnGridRowDoubleTapped"
+                  BorderBrush="Gray">
+            <DataGrid.Resources>
+                <converters:PreviewVersionToBoolConverter x:Key="PreviewVersionToBoolConverter" />
+                <converters:VersionToStringConverter x:Key="VersionToStringConverter" />
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Version" Binding="{Binding SdkVersion}" Width="Auto" />
+                <DataGridTextColumn Header="Installation Path" Binding="{Binding InstallationPath}" Width="*" />
+                <DataGridCheckBoxColumn Header="IsPreview"
+                                        Binding="{Binding ., Converter={StaticResource PreviewVersionToBoolConverter}}"
+                                        Width="Auto" />
+                <DataGridTextColumn Header="Preview Version"
+                                    Binding="{Binding PreviewVersion, Converter={StaticResource VersionToStringConverter}}"
+                                    Width="Auto" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Copy as JSON" Command="{Binding CopyAsJsonCommand}" />
+        </StackPanel>
+    </StackPanel>
 
-    <DataGrid Margin="20"
-              ItemsSource="{Binding Sdks}"
-              IsReadOnly="True"
-              SelectionMode="Single"
-              BorderThickness="2"
-              GridLinesVisibility="All"
-              SelectedItem="{Binding SelectedSdk}"
-              DoubleTapped="OnGridRowDoubleTapped"
-              BorderBrush="Gray">
-        <DataGrid.Columns>
-            <DataGridTextColumn Header="Version" Binding="{Binding Version}" Width="Auto" />
-            <DataGridTextColumn Header="Installation Path" Binding="{Binding InstallationPath}" Width="*" />
-        </DataGrid.Columns>
-    </DataGrid>
 
 </views:NavigatableUserControl>
