@@ -1,21 +1,16 @@
-using System;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
-using System.Linq;
 using Avalonia.Markup.Xaml;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+
 using SdkManager.Extensions;
-using SdkManager.Services;
 using SdkManager.Services.Abstractions;
-using SdkManager.ViewModels;
-using SdkManager.ViewModels.Pages;
-using SdkManager.Views;
 using SdkManager.Views.Windows;
+
 using HomeView = SdkManager.Views.Pages.HomeView;
-using MainWindowViewModel = SdkManager.ViewModels.Windows.MainWindowViewModel;
-using SettingsView = SdkManager.Views.Pages.SettingsView;
 
 namespace SdkManager;
 
@@ -26,7 +21,7 @@ public class App : Application
         AvaloniaXamlLoader.Load(this);
         Services = CreateServiceProvider();
     }
-    
+
     public static IServiceProvider Services { get; private set; } = null!;
 
     public override void OnFrameworkInitializationCompleted()
@@ -41,7 +36,7 @@ public class App : Application
 
         base.OnFrameworkInitializationCompleted();
     }
-    
+
     private void DisableAvaloniaDataAnnotationValidation()
     {
         DataAnnotationsValidationPlugin[] dataValidationPluginsToRemove =
@@ -56,16 +51,13 @@ public class App : Application
     private static IServiceProvider CreateServiceProvider()
     {
         IServiceCollection services = new ServiceCollection()
-            .AddLogging(builder =>
-            {
-                builder.AddConsole();
-            })
+            .AddLogging(builder => { builder.AddConsole(); })
             .AddServices()
             .AddViews()
             .AddViewModels()
             .AddDotnetCliWrapper()
-            .AddProcessManager();
-        
+            .AddProcessManager()
+            .AddAvaloniaComponents();
 
         return services.BuildServiceProvider();
     }

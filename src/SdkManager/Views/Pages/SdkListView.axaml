@@ -35,8 +35,7 @@
         </DataGrid>
         <StackPanel Orientation="Horizontal">
             <Button Content="Copy as JSON" Command="{Binding CopyAsJsonCommand}" />
+            <Button Content="Export as CSV" Command="{Binding ExportAsCsvCommand}" />
         </StackPanel>
     </StackPanel>
-
-
 </views:NavigatableUserControl>

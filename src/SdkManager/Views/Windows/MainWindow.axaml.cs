@@ -2,13 +2,14 @@ using Avalonia.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using MainWindowViewModel = SdkManager.ViewModels.Windows.MainWindowViewModel;
 
-namespace SdkManager.Views.Windows;
-
-public partial class MainWindow : Window
+namespace SdkManager.Views.Windows
 {
-    public MainWindow()
+    public partial class MainWindow : Window
     {
-        InitializeComponent();
-        DataContext = App.Services.GetRequiredService<MainWindowViewModel>();
+        public MainWindow()
+        {
+            InitializeComponent();
+            DataContext = App.Services.GetRequiredService<MainWindowViewModel>();
+        }
     }
 }

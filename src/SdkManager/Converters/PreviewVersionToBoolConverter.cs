@@ -2,20 +2,21 @@ using System.Globalization;
 using Avalonia.Data.Converters;
 using CliWrapper.Models;
 
-namespace SdkManager.Converters;
-
-public class PreviewVersionToBoolConverter : IValueConverter
+namespace SdkManager.Converters
 {
-    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    public class PreviewVersionToBoolConverter : IValueConverter
     {
-        if (value is InstalledSdk installedSdk)
+        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            return installedSdk.PreviewVersion is not null;
-        }
+            if (value is InstalledSdk installedSdk)
+            {
+                return installedSdk.PreviewVersion is not null;
+            }
         
-        throw new InvalidOperationException("Value is not of type InstalledSdk");
-    }
+            throw new InvalidOperationException("Value is not of type InstalledSdk");
+        }
 
-    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) =>
-        throw new NotImplementedException("ConvertBack is not implemented");
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) =>
+            throw new NotImplementedException("ConvertBack is not implemented");
+    }
 }

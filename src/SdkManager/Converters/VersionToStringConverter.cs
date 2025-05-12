@@ -1,20 +1,21 @@
 using System.Globalization;
 using Avalonia.Data.Converters;
 
-namespace SdkManager.Converters;
-
-public class VersionToStringConverter : IValueConverter
+namespace SdkManager.Converters
 {
-    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    public class VersionToStringConverter : IValueConverter
     {
-        if (value is Version version)
+        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            return version.ToString();
+            if (value is Version version)
+            {
+                return version.ToString();
+            }
+
+            return "N/A";
         }
 
-        return "N/A";
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) =>
+            throw new NotImplementedException("ConvertBack is not implemented");
     }
-
-    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) =>
-        throw new NotImplementedException("ConvertBack is not implemented");
 }

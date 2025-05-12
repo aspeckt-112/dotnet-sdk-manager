@@ -1,6 +1,7 @@
-namespace SdkManager.ProcessManagers.Abstractions;
-
-public interface IProcessManager
+namespace SdkManager.ProcessManagers.Abstractions
 {
-    void OpenDirectory(string path);
+    public interface IProcessManager
+    {
+        void OpenDirectory(string path);
+    }
 }

@@ -1,6 +1,7 @@
-namespace SdkManager.ViewModels.Pages;
-
-public partial class SettingsViewModel : ViewModelBase
+namespace SdkManager.ViewModels.Pages
 {
+    public partial class SettingsViewModel : ViewModelBase
+    {
     
+    }
 }

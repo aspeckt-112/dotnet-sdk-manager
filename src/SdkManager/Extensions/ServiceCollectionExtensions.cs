@@ -1,5 +1,10 @@
+using Avalonia;
+using Avalonia.Platform.Storage;
+
 using CliWrapper;
+
 using Microsoft.Extensions.DependencyInjection;
+
 using SdkManager.ProcessManagers;
 using SdkManager.ProcessManagers.Abstractions;
 using SdkManager.Services;
@@ -15,7 +20,10 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
         services.AddSingleton<INavigationService, NavigationService>();
-        services.AddSingleton<IClipboardService, ClipboardService>();
+        services.AddSingleton<ClipboardService>();
+        services.AddSingleton<JsonUtilityService>();
+        services.AddSingleton<CsvUtilityService>();
+
         return services;
     }
 
@@ -24,6 +32,7 @@ public static class ServiceCollectionExtensions
         services.AddTransient<HomeView>();
         services.AddTransient<SdkListView>();
         services.AddTransient<SettingsView>();
+
         return services;
     }
 
@@ -33,12 +42,14 @@ public static class ServiceCollectionExtensions
         services.AddTransient<HomeViewModel>();
         services.AddTransient<SdkListViewModel>();
         services.AddTransient<SettingsViewModel>();
+
         return services;
     }
 
     public static IServiceCollection AddDotnetCliWrapper(this IServiceCollection services)
     {
         services.AddSingleton<IDotnetCliWrapper, DotnetCliWrapper>();
+
         return services;
     }
 
@@ -52,7 +63,14 @@ public static class ServiceCollectionExtensions
         {
             throw new NotImplementedException("Other operating systems are not supported yet.");
         }
-        
+
+        return services;
+    }
+
+    public static IServiceCollection AddAvaloniaComponents(this IServiceCollection services)
+    {
+        services.AddSingleton<IStorageProvider>(_ => Application.Current.GetStorageProvider());
+
         return services;
     }
 }

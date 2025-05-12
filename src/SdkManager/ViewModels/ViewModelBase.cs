@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace SdkManager.ViewModels;
-
-public class ViewModelBase : ObservableObject;
+namespace SdkManager.ViewModels
+{
+    public class ViewModelBase : ObservableObject;
+}

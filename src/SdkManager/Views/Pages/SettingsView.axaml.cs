@@ -1,17 +1,18 @@
 using SdkManager.ViewModels.Pages;
 
-namespace SdkManager.Views.Pages;
-
-public partial class SettingsView : NavigatableUserControl
+namespace SdkManager.Views.Pages
 {
-    public SettingsView(SettingsViewModel viewModel)
+    public partial class SettingsView : NavigatableUserControl
     {
-        InitializeComponent();
-        DataContext = viewModel;
-    }
+        public SettingsView(SettingsViewModel viewModel)
+        {
+            InitializeComponent();
+            DataContext = viewModel;
+        }
 
-    public override void OnNavigatedTo()
-    {
+        public override void OnNavigatedTo()
+        {
         
+        }
     }
 }

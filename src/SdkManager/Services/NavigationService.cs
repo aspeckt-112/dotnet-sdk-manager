@@ -3,16 +3,17 @@ using Microsoft.Extensions.DependencyInjection;
 using SdkManager.Services.Abstractions;
 using SdkManager.Views;
 
-namespace SdkManager.Services;
-
-public class NavigationService(IServiceProvider serviceProvider) : INavigationService
+namespace SdkManager.Services
 {
-    public void NavigateTo<TView>() where TView : NavigatableUserControl
+    public class NavigationService(IServiceProvider serviceProvider) : INavigationService
     {
-        var view = serviceProvider.GetRequiredService<TView>();
-        view.OnNavigatedTo();
-        OnNavigationCompleted(view);
-    }
+        public void NavigateTo<TView>() where TView : NavigatableUserControl
+        {
+            var view = serviceProvider.GetRequiredService<TView>();
+            view.OnNavigatedTo();
+            OnNavigationCompleted(view);
+        }
 
-    public Action<UserControl> OnNavigationCompleted { get; set; } = null!;
+        public Action<UserControl> OnNavigationCompleted { get; set; } = null!;
+    }
 }

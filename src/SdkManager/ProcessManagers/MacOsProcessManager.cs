@@ -1,13 +1,14 @@
 using System.Diagnostics;
 using SdkManager.ProcessManagers.Abstractions;
 
-namespace SdkManager.ProcessManagers;
-
-public class MacOsProcessManager : IProcessManager
+namespace SdkManager.ProcessManagers
 {
-    public void OpenDirectory(string path)
+    public class MacOsProcessManager : IProcessManager
     {
-        ProcessStartInfo startInfo = new ProcessStartInfo("open", path);
-        Process.Start(startInfo);
+        public void OpenDirectory(string path)
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo("open", path);
+            Process.Start(startInfo);
+        }
     }
 }

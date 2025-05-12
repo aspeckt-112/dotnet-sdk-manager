@@ -1,28 +1,29 @@
 using SdkManager.ViewModels.Pages;
 
-namespace SdkManager.Views.Pages;
-
-public partial class HomeView : NavigatableUserControl
+namespace SdkManager.Views.Pages
 {
-    private readonly HomeViewModel _viewModel;
+    public partial class HomeView : NavigatableUserControl
+    {
+        private readonly HomeViewModel _viewModel;
     
-    public HomeView(HomeViewModel viewModel)
-    {
-        InitializeComponent();
-        _viewModel = viewModel;
-        DataContext = _viewModel;
-    }
-
-    public override async void OnNavigatedTo()
-    {
-        try
+        public HomeView(HomeViewModel viewModel)
         {
-            await _viewModel.OnNavigatedTo();
+            InitializeComponent();
+            _viewModel = viewModel;
+            DataContext = _viewModel;
         }
-        catch (Exception e)
+
+        public override async void OnNavigatedTo()
         {
-            Console.WriteLine(e);
-            throw; // TODO Handle this better
+            try
+            {
+                await _viewModel.OnNavigatedTo();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw; // TODO Handle this better
+            }
         }
     }
 }

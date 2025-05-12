@@ -1,11 +1,12 @@
 using CliWrapper.Models;
 
-namespace SdkManager.Extensions;
-
-public static class InstalledSdkExtensions
+namespace SdkManager.Extensions
 {
-    public static string GetFullPath(this InstalledSdk installedSdk)
+    public static class InstalledSdkExtensions
     {
-        return Path.Combine(installedSdk.InstallationPath, installedSdk.SdkVersion.ToString());
+        public static string GetFullPath(this InstalledSdk installedSdk)
+        {
+            return Path.Combine(installedSdk.InstallationPath, installedSdk.SdkVersion.ToString());
+        }
     }
 }
