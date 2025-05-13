@@ -1,4 +1,5 @@
 using Avalonia;
+using Avalonia.Input.Platform;
 using Avalonia.Platform.Storage;
 
 using CliWrapper;
@@ -20,7 +21,6 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
         services.AddSingleton<INavigationService, NavigationService>();
-        services.AddSingleton<ClipboardService>();
         services.AddSingleton<JsonUtilityService>();
         services.AddSingleton<CsvUtilityService>();
 
@@ -70,6 +70,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddAvaloniaComponents(this IServiceCollection services)
     {
         services.AddSingleton<IStorageProvider>(_ => Application.Current.GetStorageProvider());
+        services.AddSingleton<IClipboard>(_ => Application.Current.GetClipboard());
 
         return services;
     }

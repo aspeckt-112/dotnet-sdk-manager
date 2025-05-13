@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Input.Platform;
 using Avalonia.Platform.Storage;
 
 namespace SdkManager.Extensions;
@@ -44,5 +45,17 @@ public static class ApplicationExtensions
         }
 
         return mainWindow.StorageProvider;
+    }
+
+    public static IClipboard GetClipboard(this Application application)
+    {
+        Window mainWindow = application.GetMainWindow();
+        
+        if (mainWindow.Clipboard is null)
+        {
+            throw new InvalidOperationException("Avalonia application does not have a clipboard.");
+        }
+        
+        return mainWindow.Clipboard;
     }
 }

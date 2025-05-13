@@ -1,25 +1,28 @@
 using System.Text.Json;
 
+using Avalonia.Input.Platform;
+
 namespace SdkManager.Services;
 
 public class JsonUtilityService
 {
+    private readonly IClipboard _clipboard;
     private readonly JsonSerializerOptions _jsonOptions;
-    private readonly ClipboardService _clipboardService;
 
-    public JsonUtilityService(ClipboardService clipboardService)
+    public JsonUtilityService(IClipboard clipboard)
     {
+        _clipboard = clipboard;
+
         _jsonOptions = new JsonSerializerOptions
         {
             WriteIndented = true
         };
-
-        _clipboardService = clipboardService;
     }
 
     public Task CopyJsonToClipboard<T>(T obj)
     {
         string json = JsonSerializer.Serialize(obj, _jsonOptions);
-        return _clipboardService.CopyToClipboard(json);
+
+        return _clipboard.SetTextAsync(json);
     }
 }
