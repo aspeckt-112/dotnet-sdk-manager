@@ -31,6 +31,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddTransient<HomeView>();
         services.AddTransient<SdkListView>();
+        services.AddTransient<RuntimeListView>();
         services.AddTransient<SettingsView>();
 
         return services;
@@ -41,6 +42,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<MainWindowViewModel>();
         services.AddTransient<HomeViewModel>();
         services.AddTransient<SdkListViewModel>();
+        services.AddTransient<RuntimeListViewModel>();
         services.AddTransient<SettingsViewModel>();
 
         return services;

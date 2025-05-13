@@ -1,8 +1,8 @@
 namespace CliWrapper.Models;
 
-public record InstalledSdk
+public record InstalledRuntime
 {
-    public required Version SdkVersion { get; init; }
+    public required Version RuntimeVersion { get; init; }
 
     public required string InstallationPath { get; init; }
 

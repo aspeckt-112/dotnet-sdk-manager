@@ -8,6 +8,7 @@ namespace SdkManager
         [STAThread]
         public static void Main(string[] args)
         {
+            // TODO Look at global error handler: https://docs.avaloniaui.net/docs/concepts/unhandledexceptions
             BuildAvaloniaApp()
                 .StartWithClassicDesktopLifetime(args);
         }

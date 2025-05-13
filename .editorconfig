@@ -2,20 +2,28 @@
 [*]
 
 # Microsoft .NET properties
+csharp_new_line_before_members_in_object_initializers = false
 csharp_preferred_modifier_order = public, override, protected, internal, file, new, private, abstract, virtual, sealed, readonly, static, extern, unsafe, volatile, async, required:suggestion
 dotnet_separate_import_directive_groups = true
 
 # ReSharper properties
 resharper_blank_lines_after_block_statements = 1
 resharper_blank_lines_after_multiline_statements = 1
+resharper_blank_lines_around_single_line_auto_property = 1
 resharper_blank_lines_before_block_statements = 1
 resharper_blank_lines_before_control_transfer_statements = 1
 resharper_blank_lines_before_multiline_statements = 1
+resharper_csharp_blank_lines_around_single_line_field = 1
+resharper_csharp_blank_lines_around_single_line_invocable = 1
 resharper_csharp_wrap_after_declaration_lpar = true
+resharper_csharp_wrap_after_invocation_lpar = true
+resharper_csharp_wrap_arguments_style = chop_if_long
 resharper_csharp_wrap_parameters_style = chop_if_long
 resharper_instance_members_qualify_declared_in = base_class
 resharper_method_or_operator_body = expression_body
 resharper_place_expr_method_on_single_line = true
 resharper_place_field_attribute_on_same_line = false
 resharper_place_simple_initializer_on_single_line = false
+resharper_wrap_chained_binary_expressions = chop_if_long
+resharper_wrap_object_and_collection_initializer_style = chop_always
 resharper_wrap_parameters_style = wrap_if_long

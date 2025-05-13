@@ -15,6 +15,7 @@
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Spacing="10">
             <Button Content="Home" Command="{Binding NavigateToHomeCommand}" />
             <Button Content="SDK List" Command="{Binding NavigateToSdkListCommand}" />
+            <Button Content="Runtime List" Command="{Binding NavigateToRuntimeListCommand}" />
             <Button Content="Settings" Command="{Binding NavigateToSettingsCommand}" />
         </StackPanel>
         <ContentControl Content="{Binding CurrentView}" />

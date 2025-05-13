@@ -7,6 +7,7 @@
         <entry key="src/SdkManager/Views/HomeView.axaml" value="src/SdkManager/SdkManager.csproj" />
         <entry key="src/SdkManager/Views/MainWindow.axaml" value="src/SdkManager/SdkManager.csproj" />
         <entry key="src/SdkManager/Views/Pages/HomeView.axaml" value="src/SdkManager/SdkManager.csproj" />
+        <entry key="src/SdkManager/Views/Pages/RuntimeListView.axaml" value="src/SdkManager/SdkManager.csproj" />
         <entry key="src/SdkManager/Views/Pages/SdkListView.axaml" value="src/SdkManager/SdkManager.csproj" />
         <entry key="src/SdkManager/Views/Pages/SettingsView.axaml" value="src/SdkManager/SdkManager.csproj" />
         <entry key="src/SdkManager/Views/SettingsPage.axaml" value="src/SdkManager/SdkManager.csproj" />

@@ -1,37 +1,35 @@
-using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Input;
-using Avalonia.Markup.Xaml;
+
 using SdkManager.ViewModels.Pages;
 
-namespace SdkManager.Views.Pages
+namespace SdkManager.Views.Pages;
+
+public partial class SdkListView : NavigatableUserControl
 {
-    public partial class SdkListView : NavigatableUserControl
+    private readonly SdkListViewModel _viewModel;
+
+    public SdkListView(SdkListViewModel viewModel)
     {
-        private readonly SdkListViewModel _viewModel;
+        _viewModel = viewModel;
+        DataContext = _viewModel;
 
-        public SdkListView(SdkListViewModel viewModel)
+        InitializeComponent();
+    }
+
+    public override async void OnNavigatedTo()
+    {
+        await _viewModel.OnNavigatedTo();
+    }
+
+    private async void OnGridRowDoubleTapped(object? sender, TappedEventArgs e)
+    {
+        try
         {
-            InitializeComponent();
-            _viewModel = viewModel;
-            DataContext = _viewModel;
+            await _viewModel.OnSdkSelected();
         }
-
-        public override async void OnNavigatedTo()
+        catch (Exception exception)
         {
-            await _viewModel.OnNavigatedTo();
-        }
-
-        private async void OnGridRowDoubleTapped(object? sender, TappedEventArgs e)
-        {
-            try
-            {
-                await _viewModel.OnSdkSelected();
-            }
-            catch (Exception exception)
-            {
-                throw; // TODO handle exception
-            }
+            throw; // TODO handle exception
         }
     }
 }

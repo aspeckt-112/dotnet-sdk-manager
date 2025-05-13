@@ -1,7 +1,9 @@
 using System.Collections.Frozen;
 using System.Diagnostics;
+
 using CliWrapper.Constants;
 using CliWrapper.Models;
+
 using Microsoft.Extensions.Logging;
 
 namespace CliWrapper;
@@ -26,11 +28,13 @@ public class DotnetCliWrapper : IDotnetCliWrapper
             using Process process = SpawnProcess(CommandConstants.Version);
             await process.WaitForExitAsync();
             int exitCode = process.ExitCode;
+
             return exitCode == 0;
         }
         catch (Exception e)
         {
             _logger.LogError(e, "Error checking if any version is installed");
+
             return false;
         }
     }
@@ -48,13 +52,15 @@ public class DotnetCliWrapper : IDotnetCliWrapper
             if (process.ExitCode != 0)
             {
                 string error = await process.StandardError.ReadToEndAsync();
-                
-                _logger.LogError("Process failed with exit code {ExitCode}: {Error}",
-                    process.ExitCode, error);
-                
+
+                _logger.LogError(
+                    "Process failed with exit code {ExitCode}: {Error}",
+                    process.ExitCode,
+                    error);
+
                 return null;
             }
-            
+
             return output.Split(Environment.NewLine)
                 .Where(line => !string.IsNullOrWhiteSpace(line))
                 .Select(ParseSdkListLine)
@@ -64,7 +70,44 @@ public class DotnetCliWrapper : IDotnetCliWrapper
         catch (Exception e)
         {
             _logger.LogError(e, "Error getting installed SDKs");
+
             return null;
+        }
+    }
+
+    public async Task<FrozenSet<InstalledRuntime>?> GetInstalledRuntimes()
+    {
+        _logger.LogInformation("Getting installed runtimes");
+
+        try
+        {
+            using Process process = SpawnProcess(CommandConstants.ListRuntimes);
+            string output = await process.StandardOutput.ReadToEndAsync();
+            await process.WaitForExitAsync();
+
+            if (process.ExitCode != 0)
+            {
+                string error = await process.StandardError.ReadToEndAsync();
+
+                _logger.LogError(
+                    "Process failed with exit code {ExitCode}: {Error}",
+                    process.ExitCode,
+                    error);
+
+                return null;
+            }
+
+            return output.Split(Environment.NewLine)
+                .Where(line => !string.IsNullOrWhiteSpace(line))
+                .Select(ParseRuntimeListLine)
+                .OrderByDescending(sdk => sdk.RuntimeVersion)
+                .ToFrozenSet();
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error getting installed runtimes");
+
+            throw;
         }
     }
 
@@ -72,22 +115,20 @@ public class DotnetCliWrapper : IDotnetCliWrapper
     {
         _logger.LogInformation("Spawning process: {Command}", command);
         ProcessStartInfo startInfo = CreateProcessStartInfo(command);
+
         return Process.Start(startInfo) ?? throw new Exception("Failed to start process"); // TODO Better exception type
     }
 
-    private ProcessStartInfo CreateProcessStartInfo(string command)
+    private ProcessStartInfo CreateProcessStartInfo(string command) => new()
     {
-        return new ProcessStartInfo
-        {
-            FileName = DotnetCli,
-            Arguments = command,
-            UseShellExecute = false,
-            RedirectStandardOutput = true,
-            RedirectStandardError = true,
-            CreateNoWindow = true
-        };
-    }
-    
+        FileName = DotnetCli,
+        Arguments = command,
+        UseShellExecute = false,
+        RedirectStandardOutput = true,
+        RedirectStandardError = true,
+        CreateNoWindow = true
+    };
+
     private InstalledSdk ParseSdkListLine(string line)
     {
         string[] splitLine = line.Split(' ');
@@ -123,7 +164,7 @@ public class DotnetCliWrapper : IDotnetCliWrapper
         {
             throw new FormatException($"Invalid version format: {versionString}");
         }
-        
+
         return new InstalledSdk
         {
             SdkVersion = sdkVersion,
@@ -131,4 +172,6 @@ public class DotnetCliWrapper : IDotnetCliWrapper
             InstallationPath = installationPath
         };
     }
+
+    private InstalledRuntime ParseRuntimeListLine(string line) => throw new NotImplementedException();
 }
