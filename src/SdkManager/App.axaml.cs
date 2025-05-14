@@ -56,7 +56,6 @@ public class App : Application
             .AddViews()
             .AddViewModels()
             .AddDotnetCliWrapper()
-            .AddProcessManager()
             .AddAvaloniaComponents();
 
         return services.BuildServiceProvider();

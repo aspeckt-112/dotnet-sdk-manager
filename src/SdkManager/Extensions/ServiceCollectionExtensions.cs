@@ -6,8 +6,6 @@ using CliWrapper;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SdkManager.ProcessManagers;
-using SdkManager.ProcessManagers.Abstractions;
 using SdkManager.Services;
 using SdkManager.Services.Abstractions;
 using SdkManager.ViewModels.Pages;
@@ -23,6 +21,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<INavigationService, NavigationService>();
         services.AddSingleton<JsonUtilityService>();
         services.AddSingleton<CsvUtilityService>();
+        services.AddSingleton<PlatformService>();
 
         return services;
     }
@@ -54,21 +53,7 @@ public static class ServiceCollectionExtensions
 
         return services;
     }
-
-    public static IServiceCollection AddProcessManager(this IServiceCollection services)
-    {
-        if (OperatingSystem.IsMacOS())
-        {
-            services.AddSingleton<IProcessManager, MacOsProcessManager>();
-        }
-        else
-        {
-            throw new NotImplementedException("Other operating systems are not supported yet.");
-        }
-
-        return services;
-    }
-
+    
     public static IServiceCollection AddAvaloniaComponents(this IServiceCollection services)
     {
         services.AddSingleton<IStorageProvider>(_ => Application.Current.GetStorageProvider());
