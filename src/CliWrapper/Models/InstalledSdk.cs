@@ -7,4 +7,6 @@ public record InstalledSdk
     public required string InstallationPath { get; init; }
 
     public Version? PreviewVersion { get; init; }
+    
+    public bool IsPreview => PreviewVersion is not null;
 }
