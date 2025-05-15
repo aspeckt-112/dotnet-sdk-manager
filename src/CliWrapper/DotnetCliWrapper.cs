@@ -131,15 +131,15 @@ public class DotnetCliWrapper : IDotnetCliWrapper
 
     private InstalledSdk ParseSdkListLine(string line)
     {
-        string[] splitLine = line.Split(' ');
-
-        if (splitLine.Length != 2)
+        int indexOfFirstSpace = line.IndexOf(' ');
+        
+        if (indexOfFirstSpace == -1)
         {
             throw new FormatException($"Invalid SDK list line format: {line}");
         }
-
-        string versionString = splitLine[0].Trim();
-        string installationPath = splitLine[1].Trim('[', ']');
+        
+        string versionString = line[..indexOfFirstSpace];
+        string installationPath = line[(indexOfFirstSpace + 1)..].Trim('[', ']', ' ');
 
         bool isPreview = !Version.TryParse(versionString, out Version? version);
 

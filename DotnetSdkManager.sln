@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkManager", "src\SdkManage
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CliWrapper", "src\CliWrapper\CliWrapper.csproj", "{117770FE-0239-4111-B4A7-FF001F2239B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkManager.Tests", "tests\SdkManager.Tests\SdkManager.Tests.csproj", "{06AA9C53-C757-44BE-94CA-04C4216FDD97}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{23E9AA52-C52E-49AB-AE27-FBD31E2FBADD} = {1577C910-09A3-43B6-B377-A9909102064F}
 		{117770FE-0239-4111-B4A7-FF001F2239B3} = {1577C910-09A3-43B6-B377-A9909102064F}
+		{06AA9C53-C757-44BE-94CA-04C4216FDD97} = {3C32C5A0-C7CC-455A-8134-746C4D5A2F19}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{23E9AA52-C52E-49AB-AE27-FBD31E2FBADD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -42,5 +45,9 @@ Global
 		{117770FE-0239-4111-B4A7-FF001F2239B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{117770FE-0239-4111-B4A7-FF001F2239B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{117770FE-0239-4111-B4A7-FF001F2239B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06AA9C53-C757-44BE-94CA-04C4216FDD97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06AA9C53-C757-44BE-94CA-04C4216FDD97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06AA9C53-C757-44BE-94CA-04C4216FDD97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06AA9C53-C757-44BE-94CA-04C4216FDD97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -20,7 +20,6 @@
                   BorderBrush="Gray">
             <DataGrid.Resources>
                 <converters:PreviewVersionToBoolConverter x:Key="PreviewVersionToBoolConverter" />
-                <converters:VersionToStringConverter x:Key="VersionToStringConverter" />
             </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Version" Binding="{Binding SdkVersion}" Width="Auto" />
@@ -29,7 +28,7 @@
                                         Binding="{Binding ., Converter={StaticResource PreviewVersionToBoolConverter}}"
                                         Width="Auto" />
                 <DataGridTextColumn Header="Preview Version"
-                                    Binding="{Binding PreviewVersion, Converter={StaticResource VersionToStringConverter}}"
+                                    Binding="{Binding PreviewVersion}"
                                     Width="Auto" />
             </DataGrid.Columns>
         </DataGrid>
