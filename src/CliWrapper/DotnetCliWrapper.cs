@@ -64,7 +64,6 @@ public class DotnetCliWrapper : IDotnetCliWrapper
             return output.Split(Environment.NewLine)
                 .Where(line => !string.IsNullOrWhiteSpace(line))
                 .Select(ParseSdkListLine)
-                .OrderByDescending(sdk => sdk.SdkVersion)
                 .ToFrozenSet();
         }
         catch (Exception e)
@@ -141,36 +140,42 @@ public class DotnetCliWrapper : IDotnetCliWrapper
         string versionString = line[..indexOfFirstSpace];
         string installationPath = line[(indexOfFirstSpace + 1)..].Trim('[', ']', ' ');
 
-        bool isPreview = !Version.TryParse(versionString, out Version? version);
-
-        if (!isPreview)
-        {
-            return new InstalledSdk
-            {
-                SdkVersion = version!,
-                InstallationPath = installationPath
-            };
-        }
-
-        string[] splitVersion = versionString.ToLower().Replace("preview.", string.Empty).Split('-');
-
-        if (splitVersion.Length != 2)
-        {
-            throw new FormatException($"Invalid preview version format: {versionString}");
-        }
-
-        if (!Version.TryParse(splitVersion[0], out Version? sdkVersion) ||
-            !Version.TryParse(splitVersion[1], out Version? previewVersion))
-        {
-            throw new FormatException($"Invalid version format: {versionString}");
-        }
-
         return new InstalledSdk
         {
-            SdkVersion = sdkVersion,
-            PreviewVersion = previewVersion,
-            InstallationPath = installationPath
+            Version = versionString,
+            InstallationPath = Path.Combine(installationPath, versionString)
         };
+
+        // bool isPreview = !Version.TryParse(versionString, out Version? version);
+        //
+        // if (!isPreview)
+        // {
+        //     return new InstalledSdk
+        //     {
+        //         Version =
+        //         InstallationPath = installationPath
+        //     };
+        // }
+        //
+        // string[] splitVersion = versionString.ToLower().Replace("preview.", string.Empty).Split('-');
+        //
+        // if (splitVersion.Length != 2)
+        // {
+        //     throw new FormatException($"Invalid preview version format: {versionString}");
+        // }
+        //
+        // if (!Version.TryParse(splitVersion[0], out Version? sdkVersion) ||
+        //     !Version.TryParse(splitVersion[1], out Version? previewVersion))
+        // {
+        //     throw new FormatException($"Invalid version format: {versionString}");
+        // }
+        //
+        // return new InstalledSdk
+        // {
+        //     SdkVersion = sdkVersion,
+        //     PreviewVersion = previewVersion,
+        //     InstallationPath = Path.Combine(installationPath, sdkVersion.ToString())
+        // };
     }
 
     private InstalledRuntime ParseRuntimeListLine(string line) => throw new NotImplementedException();

@@ -66,7 +66,7 @@ public partial class SdkListViewModel : ViewModelBase
             return;
         }
 
-        await _platformService.OpenDirectory(SelectedSdk.GetFullPath());
+        await _platformService.OpenDirectory(SelectedSdk.InstallationPath);
     }
 
     [RelayCommand(AllowConcurrentExecutions = false)]

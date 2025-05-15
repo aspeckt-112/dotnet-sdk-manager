@@ -2,11 +2,7 @@ namespace CliWrapper.Models;
 
 public record InstalledSdk
 {
-    public required Version SdkVersion { get; init; }
+    public required string Version { get; init; }
 
     public required string InstallationPath { get; init; }
-
-    public Version? PreviewVersion { get; init; }
-    
-    public bool IsPreview => PreviewVersion is not null;
 }

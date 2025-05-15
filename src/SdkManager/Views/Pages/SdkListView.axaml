@@ -4,7 +4,6 @@
                               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                               xmlns:views="clr-namespace:SdkManager.Views"
                               xmlns:pages="clr-namespace:SdkManager.ViewModels.Pages"
-                              xmlns:converters="clr-namespace:SdkManager.Converters"
                               x:DataType="pages:SdkListViewModel"
                               mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
                               x:Class="SdkManager.Views.Pages.SdkListView">
@@ -18,18 +17,9 @@
                   SelectedItem="{Binding SelectedSdk}"
                   DoubleTapped="OnGridRowDoubleTapped"
                   BorderBrush="Gray">
-            <DataGrid.Resources>
-                <converters:PreviewVersionToBoolConverter x:Key="PreviewVersionToBoolConverter" />
-            </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Version" Binding="{Binding SdkVersion}" Width="Auto" />
+                <DataGridTextColumn Header="Version" Binding="{Binding Version}" Width="Auto" />
                 <DataGridTextColumn Header="Installation Path" Binding="{Binding InstallationPath}" Width="*" />
-                <DataGridCheckBoxColumn Header="IsPreview"
-                                        Binding="{Binding ., Converter={StaticResource PreviewVersionToBoolConverter}}"
-                                        Width="Auto" />
-                <DataGridTextColumn Header="Preview Version"
-                                    Binding="{Binding PreviewVersion}"
-                                    Width="Auto" />
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Orientation="Horizontal">

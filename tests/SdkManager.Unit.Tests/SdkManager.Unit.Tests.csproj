@@ -8,4 +8,12 @@
       <ProjectReference Include="..\..\src\SdkManager\SdkManager.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Moq" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <Using Include="Moq" />
+    </ItemGroup>
+
 </Project>

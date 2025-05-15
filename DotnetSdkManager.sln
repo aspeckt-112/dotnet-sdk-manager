@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkManager", "src\SdkManage
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CliWrapper", "src\CliWrapper\CliWrapper.csproj", "{117770FE-0239-4111-B4A7-FF001F2239B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkManager.Tests", "tests\SdkManager.Tests\SdkManager.Tests.csproj", "{06AA9C53-C757-44BE-94CA-04C4216FDD97}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdkManager.Unit.Tests", "tests\SdkManager.Unit.Tests\SdkManager.Unit.Tests.csproj", "{06AA9C53-C757-44BE-94CA-04C4216FDD97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
