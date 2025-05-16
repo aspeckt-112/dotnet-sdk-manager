@@ -14,8 +14,8 @@ public partial class RuntimeListView : NavigatableUserControl
         InitializeComponent();
     }
 
-    public override void OnNavigatedTo()
+    public override async void OnNavigatedTo()
     {
-        throw new NotImplementedException();
+        await _viewModel.OnNavigatedTo();
     }
 }

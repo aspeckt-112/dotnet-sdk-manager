@@ -48,7 +48,7 @@ public partial class SdkListViewModel : ViewModelBase
 
     internal async Task OnNavigatedTo()
     {
-        FrozenSet<InstalledSdk>? installedSdks =
+        FrozenSet<InstalledSdk> installedSdks =
             await _dotnetCliWrapper.GetInstalledSdks() ?? FrozenSet<InstalledSdk>.Empty;
 
         foreach (InstalledSdk installedSdk in installedSdks)
@@ -75,7 +75,7 @@ public partial class SdkListViewModel : ViewModelBase
     [RelayCommand(AllowConcurrentExecutions = false)]
     private async Task ExportAsCsv()
     {
-        IStorageFile? stoageFile = await _storageProvider.SaveFilePickerAsync(
+        IStorageFile? storageFile = await _storageProvider.SaveFilePickerAsync(
             new FilePickerSaveOptions
             {
                 DefaultExtension = ".csv",
@@ -83,13 +83,13 @@ public partial class SdkListViewModel : ViewModelBase
                 Title = "Save CSV File"
             });
 
-        if (stoageFile is null)
+        if (storageFile is null)
         {
             _logger.LogWarning("CSV file save operation was cancelled.");
 
             return;
         }
 
-        await _csvUtilityService.SaveAsCsv(Sdks, stoageFile.GetCsvFilePath());
+        await _csvUtilityService.SaveAsCsv(Sdks, storageFile.GetCsvFilePath());
     }
 }
